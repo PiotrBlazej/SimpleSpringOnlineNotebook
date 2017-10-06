@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.naming.InvalidNameException;
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import OnlineNotebook.Model.Note;
 import OnlineNotebook.Repository.NoteRepository;
@@ -29,23 +30,21 @@ public class NoteServiceImpl implements NoteService {
 	}
 
 	@Override
-	public void saveNote(String title, String note) throws InvalidNameException {
-		String findByTitle = repository.findByTitle(title);
-		if (findByTitle != null)
-			throw new InvalidNameException("Note with title " + title + " exsist");
-		else
-		{DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		Date date = new Date();
-List<String> list = Arrays.asList(note.split( " "));
-	 String collect = list.stream().limit(3).collect(Collectors.joining( " "));
-			repository.save(new Note(title, note, dateFormat.format(date), collect));
-		}
+	public void saveNote( Note note)  {
 
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date();
+List<String> list = Arrays.asList(note.getNote().split( " "));
+	 String collect = list.stream().limit(3).collect(Collectors.joining( " "));
+			repository.save(new Note(note.getTitle().trim(), note.getNote().trim(), dateFormat.format(date), collect));
 	}
 
 	@Override
 	public void deleteNote(int id) {
+		Note findNoteById = findNoteById(id);
+		if(findNoteById!=null)
 		repository.delete(repository.findById(id));
+		
 
 	}
 
@@ -56,13 +55,16 @@ List<String> list = Arrays.asList(note.split( " "));
 
 	@Override
 	public List<Note> findAllNote() {
-		// TODO Auto-generated method stub
 		return repository.findAll();
 	}
 
 	@Override
 	public void updateNote(Note note) {
-		repository.update(note.getId(), note.getTitle(), note.getNote());
+		List<String> list = Arrays.asList(note.getNote().split(" "));
+		 String collect = list.stream().limit(3).collect(Collectors.joining( " "));
+		 Note findNoteById = findNoteById(note.getId());
+		if(findNoteById!=null)
+		 repository.update(note.getId(), note.getTitle(), note.getNote(),collect);
 
 	}
 

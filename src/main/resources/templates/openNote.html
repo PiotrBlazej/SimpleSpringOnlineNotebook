@@ -8,7 +8,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
 
-    <title>Online notebook - new note</title>
+    <title>Landing Page - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
@@ -28,9 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
-		<form>
-		 <button type="submit" action="/" class="btn btn-primary">Back</button>
-		</form>
+		<a th:href=" @{/}"  class="btn btn-primary">Back</a>
       
       </div>
     </nav>
@@ -42,20 +40,20 @@
           <h1>Online Notebook</h1>
           <h3>Make your notes</h3>
 		  
-		  <form action='#' th:action="@{/newNote}" th:object="${newNote}" method ="post" >
+		  <form action='#' th:object="${newNote}" >
 		  
 		  
 		  <div class="form-group">
     <label>Title</label>
-    <input type="text" th:field="*{title}" class="form-control" id="exampleInputEmail1" aria-describedby="help" placeholder="Insert title"/>
-   <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Name Error</td>
+    <input type="text" th:value="*{title}" readonly="true" class="form-control" id="exampleInputEmail1" />
+   
   </div>
 		  <div class="form-group">
     <label>Note</label>
-    <textarea class="form-control" type="text" th:field="*{note}" id="exampleTextarea" rows="3" aria-describedby="help" placeholder="Insert note"></textarea>
+    <textarea class="form-control" readonly="true" type="text" th:text="*{note}"   id="exampleTextarea" rows="3" ></textarea>
   </div>
   
-	<input type="submit" value="Save" class="btn btn-primary" />
+
 		  </form>
          
         </div>
