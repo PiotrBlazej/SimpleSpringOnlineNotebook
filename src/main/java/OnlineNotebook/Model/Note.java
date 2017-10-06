@@ -16,18 +16,33 @@ private int id;
 	@NotNull
 private String title;
 private String note;
-private Date date;
+private String shortNote;
+private String date;
 
 public Note(){
 	
 }
 
 public Note( String title, String note) {
-
-
 	this.title = title;
 	this.note = note;
+}
 
+
+public Note(String title, String note, String date, String shortNote) {
+	this.shortNote=shortNote;
+	this.title = title;
+	this.note = note;
+	this.date = date;
+}
+
+
+public String getShortNote() {
+	return shortNote;
+}
+
+public void setShortNote(String shortNote) {
+	this.shortNote = shortNote;
 }
 
 public int getId() {
@@ -48,11 +63,16 @@ public String getNote() {
 public void setNote(String note) {
 	this.note = note;
 }
-public Date getDate() {
+public String getDate() {
 	return date;
 }
-public void setDate(Date date) {
+public void setDate(String date) {
 	this.date = date;
+}
+
+@Override
+public String toString() {
+	return "Note [id=" + id + ", title=" + title + ", note=" + note + ", date=" + date + "]";
 }
 
 

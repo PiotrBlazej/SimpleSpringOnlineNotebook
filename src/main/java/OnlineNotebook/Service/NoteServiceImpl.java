@@ -1,8 +1,16 @@
 package OnlineNotebook.Service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.naming.InvalidNameException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +34,12 @@ public class NoteServiceImpl implements NoteService {
 		if (findByTitle != null)
 			throw new InvalidNameException("Note with title " + title + " exsist");
 		else
-			repository.save(new Note(title, note));
+		{DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		Date date = new Date();
+List<String> list = Arrays.asList(note.split( " "));
+	 String collect = list.stream().limit(3).collect(Collectors.joining( " "));
+			repository.save(new Note(title, note, dateFormat.format(date), collect));
+		}
 
 	}
 

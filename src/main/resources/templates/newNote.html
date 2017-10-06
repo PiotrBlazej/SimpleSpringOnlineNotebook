@@ -11,14 +11,14 @@
     <title>Landing Page - Start Bootstrap Theme</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet"></link>
+    <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
     <!-- Custom fonts for this template -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+    <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css"/>
 
     <!-- Custom styles for this template -->
-    <link href="css/landing-page.css" rel="stylesheet"></link>
+    <link href="css/landing-page.css" rel="stylesheet"/>
 
   </head>
 
@@ -28,11 +28,9 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <form th:action="@{/newNote}" th:method="get"  >
-        		 <button type="submit" class="btn btn-primary">New note</button>
-</form>
-
-
+		<form>
+		 <button type="submit" action="/" class="btn btn-primary">Back</button>
+		</form>
       
       </div>
     </nav>
@@ -44,41 +42,22 @@
           <h1>Online Notebook</h1>
           <h3>Make your notes</h3>
 		  
-		   <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Note</th>
-		<th>Date</th>
-		<th>Options</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-       <tr  th:each="n : ${notes}">
-        <td th:text="${n.id}">1</td>
-        <td th:text="${n.title}">First note</td>
-        <td th:text="${n.shortNote}">same notes</td>
-		<td th:text="${n.date}">10.10.2017</td>
-		<td>
-		<div class="btn-group">
-		
-
-		
-		
-		<a th:href=" @{'/open?id='+ ${n.id}}"  class="btn btn-primary">Open</a>
-    <a th:href=" @{'/edit?id='+ ${n.id}}"  class="btn btn-primary">Edit</a>
- <a th:href=" @{'/remove?id='+ ${n.id}}"  class="btn btn-primary">Remove</a>
+		  <form action='#' th:action="@{/newNote}" th:object="${newNote}" method ="post" >
+		  
+		  
+		  <div class="form-group">
+    <label>Title</label>
+    <input type="text" th:field="*{title}" class="form-control" id="exampleInputEmail1" aria-describedby="help" placeholder="Insert title"/>
+   
   </div>
-		</td>
-		
-	  </tr>
-	  
-    </tbody>
-  </table>
+		  <div class="form-group">
+    <label>Note</label>
+    <textarea class="form-control" type="text" th:field="*{note}" id="exampleTextarea" rows="3" aria-describedby="help" placeholder="Insert note"></textarea>
+  </div>
   
-
+	<input type="submit" value="Save" class="btn btn-primary" />
+		  </form>
+         
         </div>
       </div>
     </header>
