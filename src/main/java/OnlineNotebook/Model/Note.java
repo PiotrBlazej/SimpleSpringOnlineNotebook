@@ -9,11 +9,15 @@ import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+
 @Entity
 public class Note {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 private int id;
+@NotEmpty(message="Title can not be empty")
 
 private String title;
 private String note;

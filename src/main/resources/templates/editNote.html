@@ -41,7 +41,7 @@
           <h3>Make your notes</h3>
 		  
 		  <form action='#' th:action="@{/edit}" th:object="${editNote}" method ="post" >
-		  
+		   <div th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="alert alert-danger" />
 		  <input type="hidden" th:field="*{id}" />
 		  <div class="form-group">
     <label>Title</label>

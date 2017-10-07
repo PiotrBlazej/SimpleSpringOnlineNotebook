@@ -1,9 +1,12 @@
 package OnlineNotebook.Controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +29,12 @@ public class NoteController {
 	}
 
 	@PostMapping("/newNote")
-	public String saveNewNote( @ModelAttribute(value = "newNote") Note note) {
-			noteService.saveNote(note);
+	public String saveNewNote(@Valid @ModelAttribute(value = "newNote") Note note, BindingResult bindingResult) {
+	System.out.println(note);
+		if(bindingResult.hasErrors())
+			return "newNote";
+		else
+		noteService.saveNote(note);
 		return "redirect:/";
 	}
 
@@ -55,8 +62,11 @@ public class NoteController {
 		return "editNote";
 	}
 	@PostMapping(value = "/edit")
-	public String saveEditNote(@ModelAttribute(value = "editNote") Note note) {
-	noteService.updateNote(note);
+	public String saveEditNote(@Valid @ModelAttribute(value = "editNote") Note note, BindingResult bindingResult) {
+	if(bindingResult.hasErrors())
+		return "editNote";
+	else
+		noteService.updateNote(note);
 		return "redirect:/";
 	}
 
