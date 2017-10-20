@@ -30,11 +30,11 @@ public class NoteController {
 
 	@PostMapping("/newNote")
 	public String saveNewNote(@Valid @ModelAttribute(value = "newNote") Note note, BindingResult bindingResult) {
-	System.out.println(note);
 		if(bindingResult.hasErrors())
 			return "newNote";
-		else
-		noteService.saveNote(note);
+		else{
+		noteService.saveNote(note);}
+		
 		return "redirect:/";
 	}
 
@@ -65,8 +65,9 @@ public class NoteController {
 	public String saveEditNote(@Valid @ModelAttribute(value = "editNote") Note note, BindingResult bindingResult) {
 	if(bindingResult.hasErrors())
 		return "editNote";
-	else
-		noteService.updateNote(note);
+	else{
+		noteService.updateNote(note);}
+	
 		return "redirect:/";
 	}
 

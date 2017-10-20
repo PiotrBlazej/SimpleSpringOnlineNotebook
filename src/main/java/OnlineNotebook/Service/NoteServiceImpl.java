@@ -2,19 +2,17 @@ package OnlineNotebook.Service;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.naming.InvalidNameException;
-import javax.validation.Valid;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
+
 
 import OnlineNotebook.Model.Note;
 import OnlineNotebook.Repository.NoteRepository;

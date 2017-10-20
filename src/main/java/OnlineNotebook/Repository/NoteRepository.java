@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import OnlineNotebook.Model.Note;
 
 public interface NoteRepository extends JpaRepository<Note, Integer> {
-	String findByTitle(String title);
+	Note findByTitle(String title);
 	Note findById(int id);
 	@Transactional
 	@Modifying
